@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CSC441 team project - Catalog">
+  <title>Catalog | Project Name</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Shared header: keep identical on every page -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Project Name</a>
+      <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="mainNav">Menu</button>
+      <nav id="mainNav" class="main-nav" aria-label="Main">
+        <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="catalog.html" class="active" aria-current="page">Catalog</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <button id="themeBtn" class="theme-btn" type="button">Dark mode</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Catalog</h1>
+      <p>Items will load from MySQL later. For now, JavaScript builds this list from sample data.</p>
+
+      <!-- DOM demo: live search filter -->
+      <label for="searchBox">Search items</label>
+      <input id="searchBox" type="search" placeholder="Type to filter...">
+
+      <div id="itemGrid" class="card-grid" aria-live="polite"></div>
+      <p id="noResults" class="hidden">No items match your search.</p>
+    </section>
+  </main>
+
+  <!-- Shared footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Project Name &middot; CSC441 Team Project</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+/* ==========================================================
+   CSC441 Team Project - shared stylesheet
+   Every page links this file. Change colors/fonts here only.
+   ========================================================== */
+
+/* ---------- Variables (team style rules) ---------- */
+:root {
+  --color-bg: #f7f7f5;
+  --color-surface: #ffffff;
+  --color-text: #1f2328;
+  --color-muted: #5b6168;
+  --color-primary: #1f5f8b;
+  --color-primary-dark: #164766;
+  --color-border: #d9dcdf;
+  --color-error: #b00020;
+  --color-success: #1b7f3b;
+  --radius: 8px;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --max-width: 1100px;
+}
+
+/* Dark mode: JavaScript toggles the .dark class on <body> */
+body.dark {
+  --color-bg: #121416;
+  --color-surface: #1c1f22;
+  --color-text: #e8eaed;
+  --color-muted: #a5abb2;
+  --color-primary: #5aa9e0;
+  --color-primary-dark: #3d8cc4;
+  --color-border: #2f3337;
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  line-height: 1.6;
+  background: var(--color-bg);
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  transition: background 0.2s, color 0.2s;
+}
+
+main { flex: 1; padding-block: 2rem; }
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+h1, h2, h3 { line-height: 1.25; }
+a { color: var(--color-primary); }
+img { max-width: 100%; height: auto; }
+.hidden { display: none; }
+
+/* ---------- Header / navigation (flexbox) ---------- */
+.site-header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.75rem;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.main-nav ul {
+  display: flex;
+  gap: 1.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: var(--color-muted);
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+.menu-btn { display: none; }
+
+.menu-btn, .theme-btn {
+  background: none;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  border-radius: var(--radius);
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.greeting { text-align: center; color: var(--color-muted); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.65rem 1.25rem;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn:hover { background: var(--color-primary-dark); }
+
+/* ---------- Cards (CSS grid) ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+.card .price { font-weight: 700; color: var(--color-primary); }
+
+/* ---------- Table ---------- */
+.team-table { width: 100%; border-collapse: collapse; }
+.team-table th, .team-table td {
+  text-align: left;
+  padding: 0.6rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ---------- Forms ---------- */
+.form { max-width: 560px; }
+.field { display: flex; flex-direction: column; margin-bottom: 1rem; }
+label { font-weight: 600; margin-bottom: 0.25rem; }
+
+input, select, textarea {
+  font: inherit;
+  padding: 0.55rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+#searchBox { width: 100%; max-width: 400px; display: block; }
+
+/* JavaScript adds these classes during validation */
+.invalid { border-color: var(--color-error); }
+.valid { border-color: var(--color-success); }
+.error-msg { color: var(--color-error); min-height: 1.2em; }
+.hint { color: var(--color-muted); }
+.success { color: var(--color-success); font-weight: 600; }
+.error { color: var(--color-error); font-weight: 600; }
+
+/* ---------- Reviews ---------- */
+.review-list { list-style: none; padding: 0; }
+.review-list li {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+/* ---------- Responsive (media query) ---------- */
+@media (max-width: 700px) {
+  .header-inner { flex-wrap: wrap; }
+  .menu-btn { display: inline-block; }
+  .main-nav { display: none; width: 100%; order: 3; }
+  .main-nav.open { display: block; }   /* JavaScript toggles .open */
+  .main-nav ul { flex-direction: column; gap: 0.5rem; padding-bottom: 0.5rem; }
+}

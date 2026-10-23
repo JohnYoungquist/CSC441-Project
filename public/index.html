@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CSC441 team project - Home">
+  <title>Home | Project Name</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Shared header: keep identical on every page -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Project Name</a>
+      <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="mainNav">Menu</button>
+      <nav id="mainNav" class="main-nav" aria-label="Main">
+        <ul>
+        <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="catalog.html">Catalog</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <button id="themeBtn" class="theme-btn" type="button">Dark mode</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- TODO: replace placeholder text once the team finalizes the topic -->
+    <section class="hero">
+      <h1>Welcome to Project Name</h1>
+      <p>A one-sentence description of what this site does and who it is for.</p>
+      <a href="catalog.html" class="btn">Browse the catalog</a>
+    </section>
+
+    <section>
+      <h2>Featured</h2>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Feature one</h3>
+          <p>Short description of a key feature or item.</p>
+        </article>
+        <article class="card">
+          <h3>Feature two</h3>
+          <p>Short description of a key feature or item.</p>
+        </article>
+        <article class="card">
+          <h3>Feature three</h3>
+          <p>Short description of a key feature or item.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- DOM demo: JavaScript fills this greeting based on time of day -->
+    <p id="greeting" class="greeting"></p>
+  </main>
+
+  <!-- Shared footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Project Name &middot; CSC441 Team Project</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

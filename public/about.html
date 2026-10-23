@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CSC441 team project - About">
+  <title>About | Project Name</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Shared header: keep identical on every page -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Project Name</a>
+      <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="mainNav">Menu</button>
+      <nav id="mainNav" class="main-nav" aria-label="Main">
+        <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active" aria-current="page">About</a></li>
+        <li><a href="catalog.html">Catalog</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <button id="themeBtn" class="theme-btn" type="button">Dark mode</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>About Us</h1>
+      <p>Explain the purpose of the site and the problem it solves.</p>
+    </section>
+
+    <section>
+      <h2>Our Team</h2>
+      <table class="team-table">
+        <thead>
+          <tr><th>Name</th><th>Role</th><th>Pages / Features</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>John Youngquist</td><td>TBD</td><td>TBD</td></tr>
+          <tr><td>Teammate 2</td><td>TBD</td><td>TBD</td></tr>
+          <tr><td>Teammate 3</td><td>TBD</td><td>TBD</td></tr>
+          <tr><td>Teammate 4</td><td>TBD</td><td>TBD</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Built With</h2>
+      <ul>
+        <li>HTML5 and CSS3</li>
+        <li>JavaScript (DOM and form validation)</li>
+        <li>Node.js + Express (coming later)</li>
+        <li>MySQL and MongoDB (coming later)</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Shared footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Project Name &middot; CSC441 Team Project</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

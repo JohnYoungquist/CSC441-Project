@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CSC441 team project - Contact">
+  <title>Contact | Project Name</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Shared header: keep identical on every page -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Project Name</a>
+      <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="mainNav">Menu</button>
+      <nav id="mainNav" class="main-nav" aria-label="Main">
+        <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="catalog.html">Catalog</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+      <button id="themeBtn" class="theme-btn" type="button">Dark mode</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Contact Us</h1>
+      <p>Messages will be saved to MongoDB later. For now, JavaScript validates the form.</p>
+
+      <form id="contactForm" class="form" novalidate>
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" autocomplete="name">
+          <small class="error-msg"></small>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email">
+          <small class="error-msg"></small>
+        </div>
+        <div class="field">
+          <label for="phone">Phone (optional)</label>
+          <input id="phone" name="phone" type="tel" placeholder="555-555-5555">
+          <small class="error-msg"></small>
+        </div>
+        <div class="field">
+          <label for="topic">Topic</label>
+          <select id="topic" name="topic">
+            <option value="">Choose...</option>
+            <option>General question</option>
+            <option>Feedback</option>
+            <option>Support</option>
+          </select>
+          <small class="error-msg"></small>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5"></textarea>
+          <small class="error-msg"></small>
+          <small id="charCount" class="hint">0 / 500</small>
+        </div>
+        <button type="submit" class="btn">Send message</button>
+        <p id="formStatus" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <!-- Shared footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Project Name &middot; CSC441 Team Project</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
