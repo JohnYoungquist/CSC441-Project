@@ -1,6 +1,6 @@
 # Team Workflow
 
-**Team size:** 2 (Developer 1: @JohnYoungquist, Developer 2: @johnstm00). Roles are listed in [design.md](design.md#6-roles-2-person-team).
+**Team size:** 2 (Developer 1: John Youngquist, @JohnYoungquist, Developer 2: Matthew Johnston, @johnstm00). Roles are listed in [design.md](design.md#6-roles-2-person-team).
 
 ## Tools
 - **GitHub** – this repo + the "CSC441 Project" Projects board for tasks

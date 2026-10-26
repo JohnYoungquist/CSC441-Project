@@ -75,7 +75,7 @@ Form field names in the HTML already match these fields.
 
 Each developer owns complete pages **and** one database, so both people touch HTML, CSS, JavaScript, Node.js, and a database. This keeps the split even and gives each person clear work to point to in the peer evaluation.
 
-| Area | Developer 1: John (@JohnYoungquist) | Developer 2: Teammate (@johnstm00) |
+| Area | Developer 1: John (@JohnYoungquist) | Developer 2: Matthew Johnston (@johnstm00) |
 |---|---|---|
 | Pages | Home, About, Catalog | Reviews, Contact, Login _(optional 6th page)_ |
 | Shared front end | `styles.css`: theme, layout, responsive design | `main.js`: form validation, DOM features |

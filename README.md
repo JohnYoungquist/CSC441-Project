@@ -13,7 +13,7 @@ Two-person team. Each developer owns pages front to back plus one database, so t
 | Developer | GitHub | Pages | Shared code | Database / Server |
 |---|---|---|---|---|
 | Developer 1: John Youngquist | @JohnYoungquist | Home, About, Catalog | `styles.css` (layout, theme, responsive) | Express server setup, MySQL (`/api/items`) |
-| Developer 2: _(teammate name)_ | @johnstm00 | Reviews, Contact, Login _(optional)_ | `main.js` (form validation, DOM features) | MongoDB (`/api/reviews`, `/api/contact`) |
+| Developer 2: Matthew Johnston | @johnstm00 | Reviews, Contact, Login _(optional)_ | `main.js` (form validation, DOM features) | MongoDB (`/api/reviews`, `/api/contact`) |
 
 ## Project Structure
 
