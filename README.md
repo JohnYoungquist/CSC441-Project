@@ -8,12 +8,12 @@ Course-long team website for CSC441 (web programming fundamentals).
 
 ## Team
 
-| Name | Role | Pages / Features |
-|---|---|---|
-| John Youngquist | TBD | TBD |
-| Teammate 2 | TBD | TBD |
-| Teammate 3 | TBD | TBD |
-| Teammate 4 | TBD | TBD |
+Two-person team. Each developer owns pages front to back plus one database, so the work splits evenly. See [docs/design.md](docs/design.md#6-roles-2-person-team).
+
+| Developer | GitHub | Pages | Shared code | Database / Server |
+|---|---|---|---|---|
+| Developer 1: John Youngquist | @JohnYoungquist | Home, About, Catalog | `styles.css` (layout, theme, responsive) | Express server setup, MySQL (`/api/items`) |
+| Developer 2: _(teammate name)_ | @johnstm00 | Reviews, Contact, Login _(optional)_ | `main.js` (form validation, DOM features) | MongoDB (`/api/reviews`, `/api/contact`) |
 
 ## Project Structure
 

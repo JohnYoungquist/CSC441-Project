@@ -71,16 +71,20 @@ Form field names in the HTML already match these fields.
 | POST | `/api/reviews` | Save a review | MongoDB |
 | POST | `/api/contact` | Save a contact message | MongoDB |
 
-## 6. Roles (split evenly)
+## 6. Roles (2-person team)
 
-| Role | Main responsibilities | Also owns page(s) |
+Each developer owns complete pages **and** one database, so both people touch HTML, CSS, JavaScript, Node.js, and a database. This keeps the split even and gives each person clear work to point to in the peer evaluation.
+
+| Area | Developer 1: John (@JohnYoungquist) | Developer 2: Teammate (@johnstm00) |
 |---|---|---|
-| Front-end lead | HTML structure, shared header/nav/footer | TBD |
-| Style lead | `styles.css`, responsive design, consistency | TBD |
-| Back-end lead | Node.js/Express server, routes | TBD |
-| Data lead | MySQL schema, MongoDB collections, connections | TBD |
+| Pages | Home, About, Catalog | Reviews, Contact, Login _(optional 6th page)_ |
+| Shared front end | `styles.css`: theme, layout, responsive design | `main.js`: form validation, DOM features |
+| Server | Create `server.js`, Express setup, serve `public/` | Add MongoDB routes to `server.js` |
+| Database | MySQL schema, `/api/items` | MongoDB Atlas, `/api/reviews`, `/api/contact` |
+| Docs | README, design doc | Testing checklist, wireframe updates |
+| Shared | Code reviews of each other's pull requests, final presentation | Code reviews of each other's pull requests, final presentation |
 
-_With 2–3 members, combine roles (e.g., Front-end + Style, Back-end + Data)._
+**Rules for shared files:** Developer 1 has final say on `styles.css`, Developer 2 on `main.js`. Either person can edit either file, but post in the group chat first and use a pull request.
 
 ## 7. Style Guide
 - Colors and fonts are CSS variables at the top of `public/css/styles.css`. Change them there only.

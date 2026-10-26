@@ -5,7 +5,8 @@
 - [x] Wireframes (`docs/wireframes/`)
 - [x] HTML pages started
 - [x] External CSS file started
-- [ ] Team finalizes topic, name, and roles
+- [x] Team roles set (2-person split in `docs/design.md`)
+- [ ] Team finalizes topic and site name
 - [ ] Replace placeholder text with real content
 
 ## Module 2 – HTML/CSS, form validation, DOM
@@ -14,7 +15,8 @@
 - [x] Contact form with JavaScript validation (required, email, phone, length)
 - [x] Review form with validation that adds reviews to the page
 - [x] DOM changes: dark mode, mobile menu, greeting, catalog cards, live search, character counter
-- [ ] Each teammate customizes their own page(s)
+- [ ] Dev 1 customizes Home, About, Catalog + `styles.css`
+- [ ] Dev 2 customizes Reviews, Contact + `main.js`
 - [ ] Add real images to `public/images/`
 
 ## Next – Node.js server
