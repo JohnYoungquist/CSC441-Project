@@ -4,78 +4,41 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="CSC441 team project - Reviews">
-  <title>Reviews | Project Name</title>
+  <title>Service Requests | Security Equipment &amp; Service Tracker</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <!-- Shared header: keep identical on every page -->
   <header class="site-header">
     <div class="container header-inner">
-      <a href="index.html" class="logo">Project Name</a>
+      <a href="index.html" class="logo">Security Equipment &amp; Service Tracker</a>
       <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="mainNav">Menu</button>
       <nav id="mainNav" class="main-nav" aria-label="Main">
         <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="catalog.html">Catalog</a></li>
-        <li><a href="reviews.html" class="active" aria-current="page">Reviews</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="catalog.html">Equipment</a></li>
+        <li><a href="reviews.html" class="active" aria-current="page">Service Requests</a></li>
+        <li><a href="contact.html">Submit Request</a></li>
         </ul>
       </nav>
       <button id="themeBtn" class="theme-btn" type="button">Dark mode</button>
     </div>
   </header>
 
-  <main class="container">
-    <section>
-      <h1>Reviews</h1>
-      <p>Reviews will be stored in MongoDB later. For now, new reviews are added to the page with JavaScript.</p>
-    </section>
-
-    <section>
-      <h2>Leave a Review</h2>
-      <form id="reviewForm" class="form" novalidate>
-        <div class="field">
-          <label for="reviewName">Name</label>
-          <input id="reviewName" name="name" type="text">
-          <small class="error-msg"></small>
-        </div>
-        <div class="field">
-          <label for="rating">Rating</label>
-          <select id="rating" name="rating">
-            <option value="">Choose...</option>
-            <option value="5">5 - Excellent</option>
-            <option value="4">4 - Good</option>
-            <option value="3">3 - Okay</option>
-            <option value="2">2 - Poor</option>
-            <option value="1">1 - Bad</option>
-          </select>
-          <small class="error-msg"></small>
-        </div>
-        <div class="field">
-          <label for="reviewText">Review</label>
-          <textarea id="reviewText" name="review" rows="4"></textarea>
-          <small class="error-msg"></small>
-        </div>
-        <button type="submit" class="btn">Post review</button>
-      </form>
-    </section>
-
-    <section>
-      <h2>Recent Reviews</h2>
-      <ul id="reviewList" class="review-list">
-        <li><strong>Sample User</strong> &ndash; 5/5<br>Great site, easy to use.</li>
-      </ul>
-    </section>
-  </main>
+  <main class="container"><section><h1>Service Requests</h1><p class="hint"><strong>Browser prototype:</strong> Fictional equipment. Requests and notes are saved only in this browser on this device, not to a server or database. Do not enter real workplace information.</p>
+<div class="form"><div class="field"><label for="requestSearch">Search by request ID, equipment, requester, or issue</label><input id="requestSearch" type="search"></div>
+<div class="field"><label for="statusFilter">Filter by status</label><select id="statusFilter"><option value="">All statuses</option><option>Open</option><option>In Progress</option><option>Closed</option></select></div></div>
+<p><a class="btn" href="contact.html">Submit a request</a></p><p id="requestFeedback" role="status" aria-live="polite"></p><p id="requestCount" role="status"></p><div id="requestList"></div></section></main>
 
   <!-- Shared footer -->
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; <span id="year"></span> Project Name &middot; CSC441 Team Project</p>
+      <p>&copy; <span id="year"></span> Security Equipment &amp; Service Tracker &middot; CSC441 Team Project</p>
     </div>
   </footer>
 
   <script src="js/main.js"></script>
+  <script src="js/service-tracker.js"></script>
 </body>
 </html>
