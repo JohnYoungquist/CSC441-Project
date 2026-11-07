@@ -5,7 +5,7 @@ Low-fidelity sketches of each page. Replace or add images (photos of paper sketc
 ## Shared layout (all pages)
 ```
 +--------------------------------------------------------------+
-| LOGO              Home  About  Catalog  Reviews  Contact [Dark]|
+| LOGO  Home About Equipment Requests Submit Summary Sign In [Dark]|
 +--------------------------------------------------------------+
 |                                                              |
 |                      PAGE CONTENT                            |

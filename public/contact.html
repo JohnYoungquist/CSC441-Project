@@ -3,24 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="CSC441 team project - Contact">
+  <meta name="description" content="Submit a service request for security equipment.">
   <title>Submit Request | Security Equipment &amp; Service Tracker</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
   <!-- Shared header: keep identical on every page -->
   <header class="site-header">
     <div class="container header-inner">
-      <a href="index.html" class="logo">Security Equipment &amp; Service Tracker</a>
+      <a href="/" class="logo">Security Equipment &amp; Service Tracker</a>
       <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="mainNav">Menu</button>
       <nav id="mainNav" class="main-nav" aria-label="Main">
         <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="catalog.html">Equipment</a></li>
-        <li><a href="reviews.html">Service Requests</a></li>
-        <li><a href="contact.html" class="active" aria-current="page">Submit Request</a></li>
-        <li><a href="login.html">Sign In</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/equipment">Equipment</a></li>
+        <li><a href="/requests">Service Requests</a></li>
+        <li><a href="/submit" class="active" aria-current="page">Submit Request</a></li>
+        <li><a href="/summary">Summary</a></li>
+        <li><a href="/login">Sign In</a></li>
       </ul>
       </nav>
       <button id="themeBtn" class="theme-btn" type="button">Dark mode</button>
@@ -28,13 +29,13 @@
   </header>
 
   <main class="container"><section><h1>Submit Service Request</h1><p>Report a problem with security equipment.</p><p id="accountStatus" role="status">Checking sign-in…</p>
-<form id="serviceForm" class="form">
+<form id="serviceForm" class="form" novalidate>
 <div class="field"><label for="equipmentId">Equipment</label><select id="equipmentId" name="equipmentId" required><option value="">Choose equipment...</option></select></div>
 
 <div class="field"><label for="priority">Priority</label><select id="priority" name="priority" required><option value="">Choose priority...</option><option>Low</option><option>Normal</option><option>High</option></select></div>
 <div class="field"><label for="issue">Issue description</label><textarea id="issue" name="issue" required minlength="10" maxlength="500" rows="5" aria-describedby="issueCount"></textarea><small id="issueCount" class="hint">0 / 500 characters</small></div>
 <button class="btn" type="submit" disabled>Submit request</button><p id="submitStatus" role="status" aria-live="polite"></p>
-</form><p><a href="reviews.html">View service requests</a></p></section></main>
+</form><p><a href="/requests">View service requests</a></p></section></main>
 
   <!-- Shared footer -->
   <footer class="site-footer">
@@ -43,7 +44,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
-  <script src="js/service-tracker.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/service-tracker.js"></script>
 </body>
 </html>

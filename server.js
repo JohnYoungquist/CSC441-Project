@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("node:path");
 const { randomBytes, scrypt, timingSafeEqual } = require("node:crypto");
 const { promisify } = require("node:util");
+const { summaryPage } = require("./views/layout");
 const derive = promisify(scrypt);
 const sessionLifetime = 8 * 60 * 60 * 1000;
 const priorities = ["Low", "Normal", "High"];
@@ -60,14 +61,15 @@ function createApp(sql, notes, { secure = false } = {}) {
     sessions.delete(token(req));
     res.clearCookie("tracker_session", cookie).json({ ok: true });
   });
-  app.use("/api", (req, res, next) => {
+  const currentUser = req => {
     const id = token(req);
     const session = sessions.get(id);
-    if (!session || session.expires <= Date.now()) {
-      sessions.delete(id);
-      return res.status(401).json({ error: "Sign in to continue." });
-    }
-    req.user = session.user;
+    if (session && session.expires > Date.now()) return session.user;
+    sessions.delete(id);
+  };
+  app.use("/api", (req, res, next) => {
+    req.user = currentUser(req);
+    if (!req.user) return res.status(401).json({ error: "Sign in to continue." });
     next();
   });
   app.get("/api/session", (req, res) => res.json({ name: req.user.name }));
@@ -114,6 +116,34 @@ function createApp(sql, notes, { secure = false } = {}) {
     res.status(201).json(note);
   });
   app.use("/api", (req, res) => res.status(404).json({ error: "Route not found." }));
+
+  // Page navigation routes: clean URLs for each HTML page.
+  const pages = { "/": "index.html", "/about": "about.html", "/equipment": "catalog.html",
+    "/requests": "reviews.html", "/submit": "contact.html", "/login": "login.html" };
+  for (const [route, file] of Object.entries(pages))
+    app.get(route, (req, res) => res.sendFile(path.join(__dirname, "public", file)));
+
+  // Server-rendered page: queries MySQL and MongoDB, then sends finished HTML to the browser.
+  app.get("/summary", async (req, res) => {
+    const user = currentUser(req);
+    if (!user) return res.redirect("/login");
+    const sites = await run(`SELECT s.name AS site, COUNT(DISTINCT e.id) AS equipment,
+        COUNT(CASE WHEN r.status='Open' THEN 1 END) AS open,
+        COUNT(CASE WHEN r.status='In Progress' THEN 1 END) AS inProgress,
+        COUNT(CASE WHEN r.status='Closed' THEN 1 END) AS closed
+      FROM sites s JOIN user_sites us ON us.site_id=s.id AND us.user_id=?
+      LEFT JOIN equipment e ON e.site_id=s.id LEFT JOIN service_requests r ON r.equipment_id=e.id
+      GROUP BY s.id, s.name ORDER BY s.name`, [user.id]);
+    const equipment = await run(`SELECT e.id, e.name, s.name AS site,
+        COUNT(CASE WHEN r.status<>'Closed' THEN 1 END) AS activeRequests
+      FROM equipment e JOIN sites s ON s.id=e.site_id JOIN user_sites us ON us.site_id=e.site_id AND us.user_id=?
+      LEFT JOIN service_requests r ON r.equipment_id=e.id
+      GROUP BY e.id, e.name, s.name ORDER BY s.name, e.name`, [user.id]);
+    const ids = (await run(`SELECT r.id FROM service_requests r JOIN equipment e ON e.id=r.equipment_id
+      JOIN user_sites us ON us.site_id=e.site_id AND us.user_id=?`, [user.id])).map(r => r.id);
+    const recent = ids.length ? await notes.find({ requestId: { $in: ids } }).sort({ createdAt: -1 }).limit(5).toArray() : [];
+    res.set("Cache-Control", "no-store").type("html").send(summaryPage(user, sites, equipment, recent));
+  });
   app.use(express.static(path.join(__dirname, "public")));
   app.use((error, req, res, next) => {
     if (error.status === 400 || error.status === 413)
