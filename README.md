@@ -89,6 +89,13 @@ The `.html` file names still work, but the nav uses the clean routes defined in 
 | Query the NoSQL database | `GET /api/requests/:id/notes` and `/summary` (MongoDB `find`); notes are also inserted |
 | Query results formed into HTML | Browser builds cards from JSON with the DOM; `/summary` sends finished HTML from the server |
 
+### Team database setup
+
+- **MySQL:** each partner runs their own local `security_tracker` database.
+- **MongoDB:** both partners use the shared DevSandbox Atlas cluster, but each has a separate database (`MONGODB_DATABASE=security_tracker_john` for John, Matt's own database for Matt). Both local MySQL databases start request IDs at 1, and notes are keyed by request ID, so a shared database would mix up notes between machines.
+- If you drop and rebuild your local MySQL database, clear `service_notes` in your Atlas database too. Otherwise old notes will attach to new requests that reuse the same IDs.
+- Atlas only accepts connections from IP addresses on its access list. Send Matt your public IP (with any VPN turned off), and send a new one if it changes.
+
 | Demo account | Assigned location |
 |---|---|
 | north.demo | Demo North |
