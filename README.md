@@ -32,17 +32,20 @@ CSC441-Project/
 │   │   ├── main.js               # Shared page behavior
 │   │   └── service-tracker.js    # Request forms and API calls
 │   └── images/                   # Image asset folder
+├── views/
+│   └── layout.js                 # Server-rendered HTML (shared layout + Summary page)
 ├── db/
 │   ├── mysql.js                  # MySQL connection setup
 │   ├── schema.sql                # MySQL table definitions
-│   └── seed.js                   # Demo account and data setup
+│   └── seed.js                   # Demo accounts, equipment, sample requests (MySQL) and notes (MongoDB)
 ├── docs/
 │   ├── design.md                 # High-level design and team roles
 │   ├── wireframes/               # Page sketches
 │   ├── team-workflow.md          # How we collaborate with Git/GitHub
 │   └── progress.md               # Module-by-module checklist
 ├── test/
-│   └── access.test.js            # Tests assigned-site access for requests and notes
+│   ├── access.test.js            # Tests assigned-site access for requests and notes
+│   └── pages.test.js             # Tests page routes and the server-rendered Summary page
 ├── .env.example                  # Local configuration template
 ├── .gitignore                    # Files Git should ignore
 ├── package.json                  # Node.js dependencies and scripts
@@ -55,9 +58,36 @@ CSC441-Project/
 
 1. Install Node.js 22.9+ and have access to a running MySQL server and MongoDB instance (local or Atlas). Run `npm ci` in the project folder.
 2. Create a new MySQL database named `security_tracker` and an application user with access to it. Open and run `db/schema.sql` in MySQL Workbench with that database selected, or run `mysql -u YOUR_USER -p security_tracker < db/schema.sql` from Command Prompt. Use a fresh demo database.
-3. Copy `.env.example` to `.env`. Set your MySQL user/password and MongoDB connection URI. For Atlas, allow your development IP and use a database user with access to the specified database. Keep `.env` local.
-4. Set `DEMO_PASSWORD` in `.env` to a demo password of 12–256 characters and run `npm run seed`. The script creates or updates the two demo accounts. Both use this local demo password.
-5. Run `npm start` and open `http://127.0.0.1:3000`. Open the app from Node.js so the pages can use the API. If port 3000 is in use, set `PORT` in `.env`.
+3. Copy `.env.example` to `.env`. Set your MySQL user/password and MongoDB connection URI. For Atlas, copy the `mongodb+srv://...` string from Connect > Drivers, add your public IP under Network Access (turn off any VPN first), and use a database user with access to the specified database. Keep `.env` local and never commit credentials.
+4. Set `DEMO_PASSWORD` in `.env` to a demo password of 12–256 characters and run `npm run seed`. The script creates or updates the two demo accounts (both use this password), adds 10 fictional equipment items, 3 sample service requests in MySQL, and their service notes in MongoDB. It is safe to run again. If your `users` table was created from an older `schema.sql`, the seed widens `password_hash` automatically (this fixes the "Data too long for column 'password_hash'" error).
+5. Run `npm start` and open `http://127.0.0.1:3000`. Node.js 22.9+ is required (`node -v`) because the scripts use `--env-file-if-exists`. Open the app from Node.js so the pages can use the API. If port 3000 is in use, set `PORT` in `.env`.
+
+## Pages and Routes
+
+| URL | File | What it shows | Data |
+|---|---|---|---|
+| `/` | `index.html` | Home | — |
+| `/about` | `about.html` | Project purpose and team | — |
+| `/equipment` | `catalog.html` | Equipment cards with live search | MySQL `GET /api/equipment` |
+| `/requests` | `reviews.html` | Requests with search, status filter, status updates, notes | MySQL `GET/PATCH /api/requests`, MongoDB `GET/POST /api/requests/:id/notes` |
+| `/submit` | `contact.html` | Service request form with JavaScript validation | MySQL `POST /api/requests` |
+| `/summary` | `views/layout.js` | Server-rendered summary tables and recent notes | MySQL + MongoDB, HTML built on the server |
+| `/login` | `login.html` | Sign in / sign out | MySQL `users`, `POST /api/login`, `/api/logout` |
+
+The `.html` file names still work, but the nav uses the clean routes defined in `server.js`.
+
+## Requirements Coverage
+
+| Course requirement | Where it is met |
+|---|---|
+| 5+ HTML pages, external CSS | Six static pages plus the server-rendered Summary page; `public/css/styles.css` (variables, flexbox, grid, media query, dark mode) |
+| JavaScript form validation | `service-tracker.js` `validate()`: Submit Request and Sign In show inline errors and mark fields invalid; note form rejects blank notes |
+| DOM modification | Dark mode, mobile menu, greeting, footer year, equipment cards, request cards, live search/filter, character counter, validation messages |
+| Node.js server routes for page navigation | `server.js` page routes (`/`, `/about`, `/equipment`, `/requests`, `/submit`, `/login`, `/summary`) |
+| Create and populate databases | `db/schema.sql` (MySQL tables) and `npm run seed` (MySQL rows and MongoDB `service_notes` documents) |
+| Query and insert into SQL | `GET /api/equipment`, `GET /api/requests`, `POST /api/requests`, `PATCH /api/requests/:id`, `/summary` |
+| Query the NoSQL database | `GET /api/requests/:id/notes` and `/summary` (MongoDB `find`); notes are also inserted |
+| Query results formed into HTML | Browser builds cards from JSON with the DOM; `/summary` sends finished HTML from the server |
 
 | Demo account | Assigned location |
 |---|---|
@@ -69,11 +99,12 @@ MySQL stores equipment, site assignments, users and requests. MongoDB stores not
 ## Demo and verification
 
 1. Open Submit Request while signed out. Sign-in should be required.
-2. Sign in as `north.demo`, open Equipment and confirm only North devices appear. Pick a camera, submit a request, and confirm it appears on Service Requests.
-3. Search for the request, change its status, and add a note. Refresh and confirm both persist.
-4. Sign out, then sign in as `south.demo`. Confirm North equipment and requests are absent. For an API check, try submitting a North equipment ID as South (expect 403) and opening or posting notes on the North request ID (expect 404).
-5. Restart Node, sign in again, and confirm the request and note remain. In MongoDB, find the note in `service_notes` by numeric `requestId`.
-6. Check the main navigation and narrow-screen layout. Use fictional data for the demo.
+2. Try submitting Sign In and Submit Request with empty fields and confirm the inline validation messages.
+3. Sign in as `north.demo`, open Equipment and confirm only North devices appear. Pick a camera, submit a request, and confirm it appears on Service Requests.
+4. Search for the request, change its status, and add a note. Refresh and confirm both persist.
+5. Open Summary and confirm the counts and recent notes match. Sign out, then sign in as `south.demo`. Confirm North equipment and requests are absent. For an API check, try submitting a North equipment ID as South (expect 403) and opening or posting notes on the North request ID (expect 404).
+6. Restart Node, sign in again, and confirm the request and note remain. In MongoDB, find the note in `service_notes` by numeric `requestId`.
+7. Check the main navigation and narrow-screen layout. Use fictional data for the demo.
 
 `npm test` runs HTTP tests with in-memory database stand-ins. Run the checklist above with both live databases before submitting.
 
@@ -81,11 +112,12 @@ MySQL stores equipment, site assignments, users and requests. MongoDB stores not
 
 | Module | Focus | Status |
 |---|---|---|
-| 1 | High-level design, wireframes, first HTML pages, external CSS | Done (starter) |
-| 2 | More HTML/CSS, form validation, DOM modification | Done (starter); service request and sign-in pages added |
-| Next | Node.js + Express server and API | Implemented on the backend branch |
-| Later | MySQL: equipment, users, site assignments, and service requests | Implemented; live verification pending |
-| Later | MongoDB: service notes linked to MySQL request IDs | Implemented; live verification pending |
-| Final | Testing, documentation, presentation | Setup and demo steps documented; automated site access test passed. Live demo, browser checks, and presentation pending. |
+| 1 | High-level design, wireframes, first HTML pages, external CSS | Done |
+| 2 | More HTML/CSS, form validation, DOM modification | Done |
+| 3 | Node.js + Express server, page routes, API routes | Done |
+| 4 | MySQL: equipment, users, site assignments, service requests | Done; seeded and verified with a live MySQL-compatible server |
+| 4 | MongoDB: service notes linked to MySQL request IDs | Done; seeded and verified with a live MongoDB server |
+| 4 | Query results formed into HTML | Done (client-rendered pages + server-rendered `/summary`) |
+| Final | Testing, documentation, submission | Automated tests pass; live run on both partners' machines with Atlas still to confirm |
 
 See [docs/progress.md](docs/progress.md) for the detailed checklist.
