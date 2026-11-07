@@ -35,3 +35,6 @@ The original main.js contact/review handlers are inactive on the converted pages
 Create a feature branch such as matthew/service-request-prototype.
 Review this copy against the latest repository first. Include the two converted pages, new script, this note, and agreed branding/navigation edits. Do not overwrite newer teammate work using the entire ZIP.
 Suggested commit: Add security service request and notes prototype.
+
+## Backend follow-up
+This document records the original browser prototype. The subsequent backend revision replaces browser storage for requests and notes. Use the root README for current setup and verification. Site access is assigned in MySQL through user_sites and checked by the server.

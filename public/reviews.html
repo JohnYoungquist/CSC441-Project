@@ -20,13 +20,14 @@
         <li><a href="catalog.html">Equipment</a></li>
         <li><a href="reviews.html" class="active" aria-current="page">Service Requests</a></li>
         <li><a href="contact.html">Submit Request</a></li>
-        </ul>
+        <li><a href="login.html">Sign In</a></li>
+      </ul>
       </nav>
       <button id="themeBtn" class="theme-btn" type="button">Dark mode</button>
     </div>
   </header>
 
-  <main class="container"><section><h1>Service Requests</h1><p class="hint"><strong>Browser prototype:</strong> Fictional equipment. Requests and notes are saved only in this browser on this device, not to a server or database. Do not enter real workplace information.</p>
+  <main class="container"><section><h1>Service Requests</h1><p id="accountStatus" role="status">Checking sign-in…</p>
 <div class="form"><div class="field"><label for="requestSearch">Search by request ID, equipment, requester, or issue</label><input id="requestSearch" type="search"></div>
 <div class="field"><label for="statusFilter">Filter by status</label><select id="statusFilter"><option value="">All statuses</option><option>Open</option><option>In Progress</option><option>Closed</option></select></div></div>
 <p><a class="btn" href="contact.html">Submit a request</a></p><p id="requestFeedback" role="status" aria-live="polite"></p><p id="requestCount" role="status"></p><div id="requestList"></div></section></main>
