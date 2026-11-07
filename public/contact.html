@@ -20,19 +20,20 @@
         <li><a href="catalog.html">Equipment</a></li>
         <li><a href="reviews.html">Service Requests</a></li>
         <li><a href="contact.html" class="active" aria-current="page">Submit Request</a></li>
-        </ul>
+        <li><a href="login.html">Sign In</a></li>
+      </ul>
       </nav>
       <button id="themeBtn" class="theme-btn" type="button">Dark mode</button>
     </div>
   </header>
 
-  <main class="container"><section><h1>Submit Service Request</h1><p>Report a problem with security equipment.</p><p class="hint"><strong>Browser prototype:</strong> Fictional equipment. Requests and notes are saved only in this browser on this device, not to a server or database. Do not enter real workplace information.</p>
+  <main class="container"><section><h1>Submit Service Request</h1><p>Report a problem with security equipment.</p><p id="accountStatus" role="status">Checking sign-in…</p>
 <form id="serviceForm" class="form">
 <div class="field"><label for="equipmentId">Equipment</label><select id="equipmentId" name="equipmentId" required><option value="">Choose equipment...</option></select></div>
-<div class="field"><label for="requester">Requester name</label><input id="requester" name="requester" required minlength="2" maxlength="100" autocomplete="name"></div>
+
 <div class="field"><label for="priority">Priority</label><select id="priority" name="priority" required><option value="">Choose priority...</option><option>Low</option><option>Normal</option><option>High</option></select></div>
 <div class="field"><label for="issue">Issue description</label><textarea id="issue" name="issue" required minlength="10" maxlength="500" rows="5" aria-describedby="issueCount"></textarea><small id="issueCount" class="hint">0 / 500 characters</small></div>
-<button class="btn" type="submit">Save demo request</button><p id="submitStatus" role="status" aria-live="polite"></p>
+<button class="btn" type="submit" disabled>Submit request</button><p id="submitStatus" role="status" aria-live="polite"></p>
 </form><p><a href="reviews.html">View service requests</a></p></section></main>
 
   <!-- Shared footer -->

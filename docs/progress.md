@@ -6,7 +6,7 @@
 - [x] HTML pages started
 - [x] External CSS file started
 - [x] Team roles set (2-person split in `docs/design.md`)
-- [ ] Team finalizes topic and site name
+- [x] Team finalizes topic and site name
 - [ ] Replace placeholder text with real content
 
 ## Module 2 – HTML/CSS, form validation, DOM
@@ -16,20 +16,20 @@
 - [x] Review form with validation that adds reviews to the page
 - [x] DOM changes: dark mode, mobile menu, greeting, catalog cards, live search, character counter
 - [ ] Dev 1 customizes Home, About, Catalog + `styles.css`
-- [ ] Dev 2 customizes Reviews, Contact + `main.js`
+- [x] Dev 2 customizes Reviews, Contact + `main.js`
 - [ ] Add real images to `public/images/`
 
 ## Next – Node.js server
-- [ ] `npm init`, install Express
-- [ ] `server.js` serves the `public/` folder
+- [x] `npm init`, install Express
+- [x] `server.js` serves the `public/` folder
 - [ ] Add API routes from `docs/design.md`
 
 ## Later – Databases
-- [ ] MySQL: create tables, connect with `mysql2`, load catalog items
+- [x] MySQL: create tables, connect with `mysql2`, load catalog items
 - [ ] MongoDB: Atlas cluster, connect, save reviews and contact messages
 - [ ] Replace `sampleItems` and TODOs in `main.js` with `fetch()` calls
 
 ## Final
 - [ ] Test all pages and forms
-- [ ] Update README with setup steps
+- [x] Update README with setup steps
 - [ ] Peer evaluation and presentation

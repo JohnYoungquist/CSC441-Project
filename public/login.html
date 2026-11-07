@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CSC441 team project - Contact">
+  <title>Sign In | Security Equipment &amp; Service Tracker</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Shared header: keep identical on every page -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Security Equipment &amp; Service Tracker</a>
+      <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="mainNav">Menu</button>
+      <nav id="mainNav" class="main-nav" aria-label="Main">
+        <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="catalog.html">Equipment</a></li>
+        <li><a href="reviews.html">Service Requests</a></li>
+        <li><a href="contact.html">Submit Request</a></li>
+        <li><a href="login.html" class="active" aria-current="page">Sign In</a></li>
+      </ul>
+      </nav>
+      <button id="themeBtn" class="theme-btn" type="button">Dark mode</button>
+    </div>
+  </header>
+
+  <main class="container">
+  <h1>Sign In</h1>
+  <p>Use your assigned account to request service for your locations.</p>
+  <form id="loginForm" class="form" hidden>
+    <div class="field"><label for="username">Username</label>
+      <input id="username" name="username" required maxlength="60" autocomplete="username"></div>
+    <div class="field"><label for="password">Password</label>
+      <input id="password" name="password" type="password" required maxlength="256" autocomplete="current-password"></div>
+    <button class="btn" type="submit">Sign in</button>
+  </form>
+  <button id="logout" class="btn" type="button" hidden>Sign out</button>
+  <p id="accountStatus" role="status">Checking sign-in…</p>
+</main>
+
+  <!-- Shared footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Security Equipment &amp; Service Tracker &middot; CSC441 Team Project</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/service-tracker.js"></script>
+</body>
+</html>

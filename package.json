@@ -1,0 +1,25 @@
+{
+  "name": "security-equipment-service-tracker",
+  "version": "1.0.0",
+  "description": "Course-long team website for CSC441 (web programming fundamentals).",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.js",
+    "seed": "node --env-file-if-exists=.env db/seed.js",
+    "test": "node --test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0",
+    "mongodb": "^6.22.0",
+    "mysql2": "^3.24.6"
+  },
+  "engines": {
+    "node": ">=22.9"
+  }
+}

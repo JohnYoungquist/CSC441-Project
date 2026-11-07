@@ -4,23 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="CSC441 team project - About">
-  <title>About | Project Name</title>
+  <title>About | Security Equipment &amp; Service Tracker</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <!-- Shared header: keep identical on every page -->
   <header class="site-header">
     <div class="container header-inner">
-      <a href="index.html" class="logo">Project Name</a>
+      <a href="index.html" class="logo">Security Equipment &amp; Service Tracker</a>
       <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="mainNav">Menu</button>
       <nav id="mainNav" class="main-nav" aria-label="Main">
         <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html" class="active" aria-current="page">About</a></li>
-        <li><a href="catalog.html">Catalog</a></li>
-        <li><a href="reviews.html">Reviews</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        </ul>
+        <li><a href="catalog.html">Equipment</a></li>
+        <li><a href="reviews.html">Service Requests</a></li>
+        <li><a href="contact.html">Submit Request</a></li>
+        <li><a href="login.html">Sign In</a></li>
+      </ul>
       </nav>
       <button id="themeBtn" class="theme-btn" type="button">Dark mode</button>
     </div>
@@ -29,7 +30,7 @@
   <main class="container">
     <section>
       <h1>About Us</h1>
-      <p>Explain the purpose of the site and the problem it solves.</p>
+      <p>The tracker gives users one place to report physical security equipment problems and follow service requests at their assigned locations. The course demo uses fictional sites and equipment.</p>
     </section>
 
     <section>
@@ -39,8 +40,8 @@
           <tr><th>Name</th><th>Role</th><th>Pages / Features</th></tr>
         </thead>
         <tbody>
-          <tr><td>John Youngquist</td><td>Developer 1: Front-end styling, server, MySQL</td><td>Home, About, Catalog</td></tr>
-          <tr><td>Matthew Johnston</td><td>Developer 2: JavaScript, forms, MongoDB</td><td>Reviews, Contact</td></tr>
+          <tr><td>John Youngquist</td><td>Developer 1: Front-end styling, server, MySQL</td><td>Home, About, Equipment</td></tr>
+          <tr><td>Matthew Johnston</td><td>Developer 2: JavaScript, forms, MongoDB</td><td>Service Requests, Submit Request, Sign In</td></tr>
         </tbody>
       </table>
     </section>
@@ -50,8 +51,8 @@
       <ul>
         <li>HTML5 and CSS3</li>
         <li>JavaScript (DOM and form validation)</li>
-        <li>Node.js + Express (coming later)</li>
-        <li>MySQL and MongoDB (coming later)</li>
+        <li>Node.js + Express</li>
+        <li>MySQL and MongoDB</li>
       </ul>
     </section>
   </main>
@@ -59,7 +60,7 @@
   <!-- Shared footer -->
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; <span id="year"></span> Project Name &middot; CSC441 Team Project</p>
+      <p>&copy; <span id="year"></span> Security Equipment &amp; Service Tracker &middot; CSC441 Team Project</p>
     </div>
   </footer>
 
