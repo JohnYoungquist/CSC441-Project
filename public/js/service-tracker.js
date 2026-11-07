@@ -15,6 +15,39 @@ document.addEventListener("DOMContentLoaded", () => {
     node.textContent = text;
     node.className = failed ? "error" : "";
   };
+  // Form validation: each rule returns an error message or "". JavaScript adds the
+  // message under the field and toggles the .invalid/.valid classes (DOM modification).
+  function validate(formEl, rules) {
+    let firstBad;
+    for (const [name, rule] of Object.entries(rules)) {
+      const field = formEl.elements[name];
+      let msg = field.parentElement.querySelector(".error-msg");
+      if (!msg) {
+        msg = make("small", "", "error-msg");
+        msg.id = field.id + "Error";
+        field.parentElement.append(msg);
+        field.setAttribute("aria-describedby", [field.getAttribute("aria-describedby"), msg.id].filter(Boolean).join(" "));
+      }
+      const error = rule(field.value.trim());
+      msg.textContent = error;
+      field.classList.toggle("invalid", Boolean(error));
+      field.classList.toggle("valid", !error);
+      field.setAttribute("aria-invalid", Boolean(error));
+      if (error && !firstBad) firstBad = field;
+    }
+    firstBad?.focus();
+    return !firstBad;
+  }
+  const loginRules = {
+    username: v => !v ? "Enter your username." : /^[a-z0-9._-]{3,60}$/i.test(v) ? "" : "Usernames use 3–60 letters, numbers, dots, dashes, or underscores.",
+    password: v => v ? "" : "Enter your password."
+  };
+  const requestRules = {
+    equipmentId: v => v ? "" : "Choose the equipment that needs service.",
+    priority: v => v ? "" : "Choose a priority.",
+    issue: v => v.length < 10 ? `Describe the issue in at least 10 characters (${v.length} so far).` : v.length > 500 ? "Keep the description under 500 characters." : ""
+  };
+
   async function api(url, method = "GET", body) {
     const res = await fetch(url, { method, ...(body === undefined ? {} : {
       headers: { "Content-Type": "application/json" }, body: JSON.stringify(body)
@@ -25,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!res.ok) {
       if (res.status === 401 && !login) {
         account.replaceChildren(make("a", "Sign in to continue"));
-        account.firstChild.href = "login.html";
+        account.firstChild.href = "/login";
         if (form) form.querySelector("button").disabled = true;
         if (list) list.replaceChildren();
         if (grid) grid.replaceChildren();
@@ -48,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
       show(account, user ? `Signed in as ${user.name}.` : "");
       if (user) {
         const link = make("a", "Submit a service request");
-        link.href = "contact.html";
+        link.href = "/submit";
         account.append(" ", link);
       }
       logout.addEventListener("click", async () => {
@@ -57,11 +90,12 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       login.addEventListener("submit", async event => {
         event.preventDefault();
+        if (!validate(login, loginRules)) return;
         const button = login.querySelector("button");
         button.disabled = true;
         try {
           await api("/api/login", "POST", Object.fromEntries(new FormData(login)));
-          location.href = "contact.html";
+          location.href = "/submit";
         } catch (error) { show(account, error.message, true); button.disabled = false; }
       });
       return;
@@ -77,18 +111,23 @@ document.addEventListener("DOMContentLoaded", () => {
       submit.disabled = !equipment.length;
       const issue = form.elements.issue;
       const counter = document.getElementById("issueCount");
-      const updateCount = () => { counter.textContent = `${issue.value.length} / 500 characters`; };
+      const updateCount = () => {
+        counter.textContent = `${issue.value.length} / 500 characters`;
+        counter.classList.toggle("error", issue.value.length > 450);
+      };
       issue.addEventListener("input", updateCount);
       const feedback = document.getElementById("submitStatus");
       if (!equipment.length) show(feedback, "No equipment is available for your assigned locations.");
       form.addEventListener("submit", async event => {
         event.preventDefault();
+        if (!validate(form, requestRules)) return;
         submit.disabled = true;
         let signedOut = false;
         try {
           const record = await api("/api/requests", "POST", Object.fromEntries(new FormData(form)));
           show(feedback, `Service request SR-${record.id} submitted.`);
           form.reset(); updateCount();
+          form.querySelectorAll(".valid").forEach(el => el.classList.remove("valid"));
         } catch (error) { signedOut = error.status === 401; show(feedback, error.message, true); }
         finally { submit.disabled = signedOut; }
       });
@@ -104,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
         for (const item of matching) {
           const card = make("article", undefined, "card");
           const link = make("a", "Request service");
-          link.href = "contact.html?equipment=" + encodeURIComponent(item.id);
+          link.href = "/submit?equipment=" + encodeURIComponent(item.id);
           card.append(make("h2", item.name), make("p", item.id), make("p", item.site), link);
           grid.append(card);
         }
@@ -175,7 +214,8 @@ document.addEventListener("DOMContentLoaded", () => {
         noteForm.addEventListener("submit", async event => {
           event.preventDefault(); button.disabled = true;
           try {
-            const note = await api(route + "/notes", "POST", { text: input.value });
+            if (!input.value.trim()) { show(info, "Enter a note before saving.", true); input.focus(); return; }
+          const note = await api(route + "/notes", "POST", { text: input.value });
             add(note);
             input.value = ""; show(info, "Service note saved.");
           } catch (error) { show(info, error.message, true); }

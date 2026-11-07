@@ -3,24 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="CSC441 team project - Reviews">
+  <meta name="description" content="View, update, and add notes to service requests.">
   <title>Service Requests | Security Equipment &amp; Service Tracker</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
   <!-- Shared header: keep identical on every page -->
   <header class="site-header">
     <div class="container header-inner">
-      <a href="index.html" class="logo">Security Equipment &amp; Service Tracker</a>
+      <a href="/" class="logo">Security Equipment &amp; Service Tracker</a>
       <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="mainNav">Menu</button>
       <nav id="mainNav" class="main-nav" aria-label="Main">
         <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="catalog.html">Equipment</a></li>
-        <li><a href="reviews.html" class="active" aria-current="page">Service Requests</a></li>
-        <li><a href="contact.html">Submit Request</a></li>
-        <li><a href="login.html">Sign In</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/equipment">Equipment</a></li>
+        <li><a href="/requests" class="active" aria-current="page">Service Requests</a></li>
+        <li><a href="/submit">Submit Request</a></li>
+        <li><a href="/summary">Summary</a></li>
+        <li><a href="/login">Sign In</a></li>
       </ul>
       </nav>
       <button id="themeBtn" class="theme-btn" type="button">Dark mode</button>
@@ -30,7 +31,7 @@
   <main class="container"><section><h1>Service Requests</h1><p id="accountStatus" role="status">Checking sign-in…</p>
 <div class="form"><div class="field"><label for="requestSearch">Search by request ID, equipment, requester, or issue</label><input id="requestSearch" type="search"></div>
 <div class="field"><label for="statusFilter">Filter by status</label><select id="statusFilter"><option value="">All statuses</option><option>Open</option><option>In Progress</option><option>Closed</option></select></div></div>
-<p><a class="btn" href="contact.html">Submit a request</a></p><p id="requestFeedback" role="status" aria-live="polite"></p><p id="requestCount" role="status"></p><div id="requestList"></div></section></main>
+<p><a class="btn" href="/submit">Submit a request</a></p><p id="requestFeedback" role="status" aria-live="polite"></p><p id="requestCount" role="status"></p><div id="requestList"></div></section></main>
 
   <!-- Shared footer -->
   <footer class="site-footer">
@@ -39,7 +40,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
-  <script src="js/service-tracker.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/service-tracker.js"></script>
 </body>
 </html>

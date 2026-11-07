@@ -57,7 +57,7 @@ main { flex: 1; padding-block: 2rem; }
 h1, h2, h3 { line-height: 1.25; }
 a { color: var(--color-primary); }
 img { max-width: 100%; height: auto; }
-.hidden { display: none; }
+.hidden, [hidden] { display: none !important; }
 
 /* ---------- Header / navigation (flexbox) ---------- */
 .site-header {
@@ -82,7 +82,7 @@ img { max-width: 100%; height: auto; }
 
 .main-nav ul {
   display: flex;
-  gap: 1.25rem;
+  gap: 1rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -93,6 +93,7 @@ img { max-width: 100%; height: auto; }
   color: var(--color-muted);
   padding: 0.25rem 0;
   border-bottom: 2px solid transparent;
+  white-space: nowrap;
 }
 
 .main-nav a:hover,
@@ -110,6 +111,7 @@ img { max-width: 100%; height: auto; }
   border-radius: var(--radius);
   padding: 0.4rem 0.75rem;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 /* ---------- Hero ---------- */
@@ -185,7 +187,7 @@ input:focus, select:focus, textarea:focus {
   outline-offset: 1px;
 }
 
-#searchBox { width: 100%; max-width: 400px; display: block; }
+#equipmentSearch, #requestSearch { width: 100%; max-width: 400px; display: block; }
 
 /* JavaScript adds these classes during validation */
 .invalid { border-color: var(--color-error); }
@@ -215,10 +217,15 @@ input:focus, select:focus, textarea:focus {
 }
 
 /* ---------- Responsive (media query) ---------- */
-@media (max-width: 700px) {
+@media (max-width: 1060px) {
   .header-inner { flex-wrap: wrap; }
   .menu-btn { display: inline-block; }
   .main-nav { display: none; width: 100%; order: 3; }
   .main-nav.open { display: block; }   /* JavaScript toggles .open */
   .main-nav ul { flex-direction: column; gap: 0.5rem; padding-bottom: 0.5rem; }
 }
+
+/* ---------- Server-rendered summary tables ---------- */
+.table-wrap { overflow-x: auto; margin-bottom: 1.5rem; }
+.table-wrap .team-table { min-width: 520px; }
+#requestList .card { margin-bottom: 1rem; }
