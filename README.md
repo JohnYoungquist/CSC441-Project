@@ -54,7 +54,7 @@ CSC441-Project/
 └── README.md
 ```
 
-## Run It (current stage)
+## Run It
 
 1. Install Node.js 22.9+ and have access to a running MySQL server and MongoDB instance (local or Atlas). Run `npm ci` in the project folder.
 2. Create a new MySQL database named `security_tracker` and an application user with access to it. Open and run `db/schema.sql` in MySQL Workbench with that database selected, or run `mysql -u YOUR_USER -p security_tracker < db/schema.sql` from Command Prompt. Use a fresh demo database.
@@ -95,6 +95,15 @@ The `.html` file names still work, but the nav uses the clean routes defined in 
 - **MongoDB:** both partners use the shared DevSandbox Atlas cluster, but each has a separate database (`MONGODB_DATABASE=security_tracker_john` for John, Matt's own database for Matt). Both local MySQL databases start request IDs at 1, and notes are keyed by request ID, so a shared database would mix up notes between machines.
 - If you drop and rebuild your local MySQL database, clear `service_notes` in your Atlas database too. Otherwise old notes will attach to new requests that reuse the same IDs.
 - Atlas only accepts connections from IP addresses on its access list. Send Matt your public IP (with any VPN turned off), and send a new one if it changes.
+
+### Running it on another computer (instructor or grader)
+
+Each copy of the project runs on its own machine: its own local MySQL and its own MongoDB database. Nothing is shared between machines, so each person's requests and notes are separate.
+Our Atlas cluster only allows listed IP addresses, so anyone else should use a local MongoDB instead:
+
+1. Install MySQL and MongoDB Community Server, then follow steps 1–5 above.
+2. In `.env`, set `MONGODB_URI=mongodb://127.0.0.1:27017` and `MONGODB_DATABASE=security_tracker`.
+3. `npm run seed` creates the demo accounts and sample data in both databases. No Atlas account is needed.
 
 | Demo account | Assigned location |
 |---|---|
