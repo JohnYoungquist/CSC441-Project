@@ -50,7 +50,7 @@ function summaryPage(user, sites, equipment, notes) {
   const equipmentRows = equipment.map(e => `<tr><td>${escape(e.id)}</td><td>${escape(e.name)}</td><td>${escape(e.site)}</td><td>${e.activeRequests}</td>
         <td><a href="/submit?equipment=${encodeURIComponent(e.id)}">Request service</a></td></tr>`).join("\n");
   const noteItems = notes.length
-    ? notes.map(n => `<li><strong>SR-${n.requestId}</strong> &middot; ${escape(n.author)} &middot; <time datetime="${new Date(n.createdAt).toISOString()}">${escape(new Date(n.createdAt).toUTCString())}</time><br>${escape(n.text)}</li>`).join("\n")
+    ? notes.map(n => `<li><strong>SR-${n.requestId}</strong> &middot; ${escape(n.author)} &middot; <time datetime="${new Date(n.createdAt).toISOString()}">${escape(new Date(n.createdAt).toLocaleString("en-US"))}</time><br>${escape(n.text)}</li>`).join("\n")
     : "<li>No service notes yet.</li>";
   return layout("Summary", "/summary", `    <section>
       <h1>Site Summary</h1>
